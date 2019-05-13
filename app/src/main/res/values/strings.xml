@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Squanchy App</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="locations">Locations</string>
+    <string name="episodes">Episodes</string>
+    <string name="characters">Characters</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_data">No data</string>
+    <string name="error_message">Something went wrong…</string>
+    <string name="no_more">No more items</string>
+    <string name="episode">Episode</string>
+    <string name="location">Location:</string>
+    <string name="character">Character:</string>
+</resources>

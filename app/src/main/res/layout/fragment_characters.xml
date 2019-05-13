@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.plugow.squanchyapp.viewModel.MainViewModel"/>
+    </data>
+    <FrameLayout
+        android:id="@+id/charactersLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.CharactersFragment">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            app:refreshing="@{viewModel.isLoadingRefresh}"
+            android:layout_width="match_parent"
+            app:onRefreshListener="@{() -> viewModel.onRefreshCharacters()}"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                app:onBottomReached = "@{() -> viewModel.onBottomReachedCharacters()}"
+                app:isLoading = "@{viewModel.isLoading}"
+                android:clipToPadding="false"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:id="@+id/list"
+                app:data="@{viewModel.characters}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </FrameLayout>
+</layout>
