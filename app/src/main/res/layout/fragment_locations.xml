@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.plugow.squanchyapp.viewModel.MainViewModel"/>
+            type="com.plugow.squanchyapp.viewModel.LocationViewModel"/>
     </data>
     <FrameLayout
         android:id="@+id/locationsLayout"

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.plugow.squanchyapp.viewModel.MainViewModel"/>
+            type="com.plugow.squanchyapp.viewModel.CharacterViewModel"/>
     </data>
     <FrameLayout
         android:id="@+id/charactersLayout"

@@ -14,7 +14,7 @@ import com.plugow.squanchyapp.R
 import com.plugow.squanchyapp.databinding.FragmentLocationsBinding
 import com.plugow.squanchyapp.ui.adapter.LocationAdapter
 import com.plugow.squanchyapp.di.util.MainEvent
-import com.plugow.squanchyapp.viewModel.MainViewModel
+import com.plugow.squanchyapp.viewModel.LocationViewModel
 import dagger.android.support.DaggerFragment
 import org.jetbrains.anko.design.snackbar
 import javax.inject.Inject
@@ -23,12 +23,12 @@ import javax.inject.Inject
 class LocationsFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var mViewModel: MainViewModel
+    private lateinit var mViewModel: LocationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = activity?.run {
-            ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+            ViewModelProviders.of(this, viewModelFactory).get(LocationViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
     }
 

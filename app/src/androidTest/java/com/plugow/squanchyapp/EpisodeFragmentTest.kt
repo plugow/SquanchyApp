@@ -13,7 +13,7 @@ import com.plugow.squanchyapp.di.util.Event
 import com.plugow.squanchyapp.di.util.MainEvent
 import com.plugow.squanchyapp.ui.MainActivity
 import com.plugow.squanchyapp.ui.fragment.EpisodesFragment
-import com.plugow.squanchyapp.viewModel.MainViewModel
+import com.plugow.squanchyapp.viewModel.EpisodeViewModel
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -42,7 +42,7 @@ class EpisodeFragmentTest {
     val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @MockK
-    lateinit var viewModel: MainViewModel
+    lateinit var viewModel: EpisodeViewModel
     private lateinit var episodesFragment: EpisodesFragment
 
     var episodes = MutableLiveData<List<EpisodeResult>>()

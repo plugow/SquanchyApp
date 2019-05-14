@@ -18,7 +18,7 @@ import com.plugow.squanchyapp.data.local.Info
 import com.plugow.squanchyapp.data.remote.ApiService
 import com.plugow.squanchyapp.di.util.Event
 import com.plugow.squanchyapp.di.util.MainEvent
-import com.plugow.squanchyapp.viewModel.MainViewModel
+import com.plugow.squanchyapp.viewModel.EpisodeViewModel
 import io.reactivex.Scheduler
 import io.reactivex.internal.schedulers.ExecutorScheduler
 import junit.framework.Assert.assertEquals
@@ -27,7 +27,7 @@ import org.junit.Rule
 import java.util.concurrent.Executor
 
 
-class MainViewModelTest {
+class EpisodeViewModelTest {
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
@@ -42,14 +42,14 @@ class MainViewModelTest {
     lateinit var mockService: ApiService
 
     @Mock lateinit var observer:Observer<Event<MainEvent>>
-    lateinit var viewModel: MainViewModel
+    lateinit var viewModel: EpisodeViewModel
 
     @Before
     fun setUp(){
         RxJavaPlugins.setInitIoSchedulerHandler { immediateScheduler }
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { immediateScheduler }
         MockitoAnnotations.initMocks(this)
-        viewModel = MainViewModel(mockService)
+        viewModel = EpisodeViewModel(mockService)
     }
 
 

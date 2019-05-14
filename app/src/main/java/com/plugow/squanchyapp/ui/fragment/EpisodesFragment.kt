@@ -14,7 +14,7 @@ import com.plugow.squanchyapp.R
 import com.plugow.squanchyapp.databinding.FragmentEpisodesBinding
 import com.plugow.squanchyapp.ui.adapter.EpisodeAdapter
 import com.plugow.squanchyapp.di.util.MainEvent
-import com.plugow.squanchyapp.viewModel.MainViewModel
+import com.plugow.squanchyapp.viewModel.EpisodeViewModel
 import dagger.android.support.DaggerFragment
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.annotations.TestOnly
@@ -23,13 +23,13 @@ import javax.inject.Inject
 class EpisodesFragment : DaggerFragment() {
     @VisibleForTesting
     @Inject lateinit var viewModelFactory:ViewModelProvider.Factory
-    private lateinit var mViewModel: MainViewModel
+    private lateinit var mViewModel: EpisodeViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = activity?.run {
-            ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+            ViewModelProviders.of(this, viewModelFactory).get(EpisodeViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
     }
 
@@ -63,7 +63,7 @@ class EpisodesFragment : DaggerFragment() {
     }
 
     @TestOnly
-    fun setViewModel(mockViewModel: MainViewModel){
+    fun setViewModel(mockViewModel: EpisodeViewModel){
         mViewModel = mockViewModel
     }
 

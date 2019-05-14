@@ -13,20 +13,20 @@ import com.plugow.squanchyapp.R
 import com.plugow.squanchyapp.databinding.FragmentCharactersBinding
 import com.plugow.squanchyapp.ui.adapter.CharacterAdapter
 import com.plugow.squanchyapp.di.util.MainEvent
-import com.plugow.squanchyapp.viewModel.MainViewModel
+import com.plugow.squanchyapp.viewModel.CharacterViewModel
 import dagger.android.support.DaggerFragment
 import org.jetbrains.anko.design.snackbar
 import javax.inject.Inject
 
 class CharactersFragment : DaggerFragment() {
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var mViewModel: MainViewModel
+    private lateinit var mViewModel: CharacterViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = activity?.run {
-            ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+            ViewModelProviders.of(this, viewModelFactory).get(CharacterViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
     }
 

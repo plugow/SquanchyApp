@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.plugow.squanchyapp.viewModel.MainViewModel"/>
+            type="com.plugow.squanchyapp.viewModel.EpisodeViewModel"/>
         <import type="android.view.View" />
     </data>
     <FrameLayout
