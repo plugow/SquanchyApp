@@ -4,27 +4,26 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.plugow.squanchyapp.data.local.CharacterResult
+import com.plugow.squanchyapp.data.local.EpisodeResult
 import com.plugow.squanchyapp.data.remote.ApiService
 import com.plugow.squanchyapp.di.util.MainEvent
 import com.plugow.squanchyapp.di.util.Event
+import com.plugow.squanchyapp.trait.RefreshableList
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
-class CharacterViewModel @Inject constructor(private val service: ApiService): ViewModel() {
-    private val mCharacterList = arrayListOf<CharacterResult>()
+class CharacterViewModel @Inject constructor(private val service: ApiService): ViewModel(), RefreshableList<CharacterResult> {
+    override val mEvent: MutableLiveData<Event<MainEvent>> =  MutableLiveData()
+    override val mItems: ArrayList<CharacterResult> = arrayListOf()
+    override var items: MutableLiveData<List<CharacterResult>> = MutableLiveData()
+    override var currentPage: Int = 1
+    override var pagesAmount: Int = 1
+    override var isLoadingRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
+    override var isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     private val disposables= CompositeDisposable()
-    var characters = MutableLiveData<List<CharacterResult>>()
-    private var currentCharacterPage = 1
-    private var characterPagesAmount = 1
-    var isLoadingRefresh = MutableLiveData<Boolean>(false)
-    var isLoading = MutableLiveData<Boolean>(false)
-    private val _mainEvent = MutableLiveData<Event<MainEvent>>()
-    val mainEvent : LiveData<Event<MainEvent>>
-        get() = _mainEvent
-
 
     override fun onCleared() {
         super.onCleared()
@@ -32,52 +31,22 @@ class CharacterViewModel @Inject constructor(private val service: ApiService): V
     }
 
 
-    private fun loadCharacters(page:Int){
+    override fun loadItems(page:Int){
         service.getCharacters(page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onSuccess = {
-                            it.info?.pages?.let { characterPagesAmount=it }
-                            mCharacterList.addAll(it.results)
-                            characters.value = mCharacterList
+                            it.info?.pages?.let { pagesAmount=it }
+                            mItems.addAll(it.results)
+                            items.value = mItems
                             loadingOff()
                         },
                         onError = {
                             loadingOff()
-                            _mainEvent.value = Event(MainEvent.ERROR)
+                            mEvent.value = Event(MainEvent.ERROR)
                         }
                 ).addTo(disposables)
     }
 
-    fun getCharacters(){
-        if(characters.value==null){
-            isLoadingRefresh.value=true
-            loadCharacters(currentCharacterPage)
-        }
-    }
-
-    fun onRefreshCharacters(){
-        currentCharacterPage=1
-        mCharacterList.clear()
-        loadCharacters(currentCharacterPage)
-    }
-
-    fun onBottomReachedCharacters(){
-        if(isLoading.value == false){
-            currentCharacterPage++
-            if (currentCharacterPage<=characterPagesAmount){
-                isLoading.value = true
-                loadCharacters(currentCharacterPage)
-            } else {
-                _mainEvent.value = Event(MainEvent.NO_MORE)
-            }
-        }
-    }
-
-
-    fun loadingOff(){
-        isLoadingRefresh.value=false
-        isLoading.value = false
-    }
 
 }

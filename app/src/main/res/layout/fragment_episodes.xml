@@ -19,16 +19,16 @@
             android:id="@+id/refreshEpisodes"
             app:refreshing="@{viewModel.isLoadingRefresh}"
             android:layout_width="match_parent"
-            app:onRefreshListener="@{() -> viewModel.onRefreshEpisodes()}"
+            app:onRefreshListener="@{() -> viewModel.onRefreshItems()}"
             android:layout_height="match_parent">
             <androidx.recyclerview.widget.RecyclerView
-                app:onBottomReached = "@{() -> viewModel.onBottomReachedEpisodes()}"
+                app:onBottomReached = "@{() -> viewModel.onBottomReached()}"
                 app:isLoading = "@{viewModel.isLoading}"
                 android:clipToPadding="false"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:id="@+id/list"
-                app:data="@{viewModel.episodes}"
+                app:data="@{viewModel.items}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

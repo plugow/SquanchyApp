@@ -44,8 +44,8 @@ class EpisodesFragment : DaggerFragment() {
         }
 
         val layout = binding.episodesLayout
-        mViewModel.getEpisodes()
-        mViewModel.mainEvent.observe(viewLifecycleOwner, Observer {
+        mViewModel.getItems()
+        mViewModel.event.observe(viewLifecycleOwner, Observer {
             when(it.getContentIfNotHandled()){
                 MainEvent.ERROR -> layout.snackbar(getString(R.string.error_message))
                 MainEvent.NO_MORE -> layout.snackbar(getString(R.string.no_more))

@@ -16,16 +16,16 @@
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             app:refreshing="@{viewModel.isLoadingRefresh}"
             android:layout_width="match_parent"
-            app:onRefreshListener="@{() -> viewModel.onRefreshCharacters()}"
+            app:onRefreshListener="@{() -> viewModel.onRefreshItems()}"
             android:layout_height="match_parent">
             <androidx.recyclerview.widget.RecyclerView
-                app:onBottomReached = "@{() -> viewModel.onBottomReachedCharacters()}"
+                app:onBottomReached = "@{() -> viewModel.onBottomReached()}"
                 app:isLoading = "@{viewModel.isLoading}"
                 android:clipToPadding="false"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:id="@+id/list"
-                app:data="@{viewModel.characters}"
+                app:data="@{viewModel.items}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

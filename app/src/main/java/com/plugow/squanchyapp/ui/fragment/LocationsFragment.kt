@@ -43,8 +43,8 @@ class LocationsFragment : DaggerFragment() {
             list.layoutManager = LinearLayoutManager(context)
         }
         val layout = binding.locationsLayout
-        mViewModel.getLocations()
-        mViewModel.mainEvent.observe(this, Observer {
+        mViewModel.getItems()
+        mViewModel.event.observe(this, Observer {
             when(it.getContentIfNotHandled()){
                 MainEvent.ERROR -> layout.snackbar(getString(R.string.error_message))
                 MainEvent.NO_MORE -> layout.snackbar(getString(R.string.no_more))
